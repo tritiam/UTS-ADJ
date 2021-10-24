@@ -5,7 +5,7 @@ Nama	: Tritia Mutiara
 Nim	: 191402048
 Kom	: C
 
-Menghubungkan GNS3 ke Internet (Lokas Server)
+•	Menghubungkan GNS3 ke Internet (Lokas Server)
 
 1.	Kita perlu mendownload Open vSwitch with management dan Cisco 3725 appliance di marketplace GNS3 terlebih dahulu.
  
@@ -81,3 +81,47 @@ R1# ping 192.168.1.249
 ![21](https://user-images.githubusercontent.com/61776791/138494931-820cba52-be1c-4e42-9166-a7d758e72144.png)
 
 Ping berhasil
+
+
+•	The NAT node
+
+Node ini memungkinkan Anda untuk menghubungkan topologi ke internet melalui NAT. Node Internet tidak digunakan lagi untuk node ini, dan node Cloud.
+
+1.	Kita pilih dan seret NAT seperti berikut dengan memilih GNS3 VM sebagai server
+![1](https://user-images.githubusercontent.com/61776791/138599029-b8e50eb5-4500-4152-8332-5e82fa0eac06.png)
+![2](https://user-images.githubusercontent.com/61776791/138599043-d5e381eb-f8fe-48a3-b2b8-315f95daa60c.png)
+
+2.	Kemudian kita pilih dan seret webterm seperti berikut
+![3](https://user-images.githubusercontent.com/61776791/138599061-fc883320-9ee8-4da5-b2af-9732f09a8f8f.png) 
+
+3.	Kita pilih dan seret switch dengan memilih GNS3 VM sebagai server
+![4](https://user-images.githubusercontent.com/61776791/138599082-04b6fe37-9aa1-47c5-9483-58ed2e247aa1.png)
+![5](https://user-images.githubusercontent.com/61776791/138599092-1267ef56-8928-46eb-8a97-1a1642afcba3.png)
+
+4.	Hubungkan switch1 (Ethernet0) ke NAT1 (nat0) dan Switch1 ke webterm-1 (eth0)
+![6](https://user-images.githubusercontent.com/61776791/138599103-0f72dd92-a3a8-4d10-be2b-1714babd2809.png)
+![7](https://user-images.githubusercontent.com/61776791/138599116-92634eef-dfa8-4277-ba7f-a3d04a8ac7da.png)
+![8](https://user-images.githubusercontent.com/61776791/138599129-714d8ab5-773d-4989-92ab-7c8c5d130de9.png)
+![9](https://user-images.githubusercontent.com/61776791/138599144-502c43fe-5978-4537-9db4-47d27c242a09.png)
+![10](https://user-images.githubusercontent.com/61776791/138599163-6ecb83a1-f0f0-459f-8916-604caf28211a.png)
+
+5.	Kita edit config webterm-1 seperti berikut
+![11](https://user-images.githubusercontent.com/61776791/138599172-a9c3d5eb-277e-4fe5-ba95-39db5ac77a64.png)
+
+6.	Untuk mengkonfigurasi wadah ini untuk menggunakan DHCP, batalkan komentar pada dua baris yang ditunjukkan pada gambar di bawah ini, dan klik Simpan
+![12](https://user-images.githubusercontent.com/61776791/138599179-6336c6da-d560-4541-b192-05f9b75b89d3.png)
+
+7.	Kemudian kita klik start
+![13](https://user-images.githubusercontent.com/61776791/138599197-dd06e154-5109-40a4-8c04-3c26be0346a9.png) 
+
+8.	Menggunakan perintah 'ifconfig' di terminal akan menunjukkan bahwa DHCP yang berjalan pada node NAT memberi wadah ini alamat 192.168.122.200 dari kumpulannya
+![14](https://user-images.githubusercontent.com/61776791/138599233-81160862-cd95-4ce6-ab46-660fe2c51133.png) 
+
+9.	Hentikan wadah Webterm, klik kanan, dan pilih "Edit konfigurasi" lagi. Kali ini, Anda akan mengomentari dua baris untuk DHCP, dan menghapus komentar pada baris di bagian Static IP dari file /etc/network/interfaces
+![15](https://user-images.githubusercontent.com/61776791/138599257-d0193578-443b-4867-b207-f85a7ab75f28.png) 
+
+10.	Membuka terminal dan menjalankan "ifconfig" akan menunjukkan bahwa wadah menggunakan alamat IP yang ditetapkan secara statis
+![16](https://user-images.githubusercontent.com/61776791/138599284-6beea009-38da-4500-a60b-9ac1dff51007.png)
+
+11.	Memasukkan URL di bilah alamat Firefox akan membuka situs web
+![17](https://user-images.githubusercontent.com/61776791/138599292-177f53b5-48df-43eb-b0f1-8273862d2565.png)
